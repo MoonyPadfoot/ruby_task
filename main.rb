@@ -21,13 +21,23 @@ people = [
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
 
+
+
 # Helper function
 
-def show_people_list(people)
-  people.each do |person|
-    p person
+def show_people_list(people, query = nil)
+  if query != nil
+    query.times do |key|
+      p people[key]
+    end
+  else
+    people.each do |person|
+      p person
+    end
   end
 end
+
+show_people_list(people, 5)
 
 # Add New User
 # show_people_list(people)
