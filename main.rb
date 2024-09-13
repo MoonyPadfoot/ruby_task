@@ -45,7 +45,7 @@ while true
 
   # Add or Delete User
   puts "Choose an option below:\n"
-  puts "(1) Add User\n(2) Delete User"
+  puts "(1) Add User\n(2) Delete User\n(3) Edit User"
   option = gets.chomp
 
   if option == 'exit'
@@ -59,7 +59,7 @@ while true
 
   option = option.to_i
 
-  if !(option.equal? 1) && !(option.equal? 2)
+  if !(option.equal? 1) && !(option.equal? 2) && !(option.equal? 3)
     p 'Invalid option'
   end
 
@@ -136,10 +136,32 @@ while true
     else
       puts "User not found."
     end
+
+  elsif  option.equal? 3
+    p "Enter national id"
+    national_id = gets.chomp
+
+    national_id = national_id.to_i
+    if people.any? { |person| person[:national_id] == national_id }
+      target = people.select {|person| person[:national_id] == national_id }
+      puts "Enter name:"
+      name = gets.chomp
+      target.first[:name] = name
+
+      puts "Enter age:"
+      age = gets.to_i
+      target.first[:age] = age
+
+      p target
+    else
+      puts "No User found."
+    end
   end
 
-  show_people_list(people)
+  # show_people_list(people)
 end
+
+# Search Helper method
 
 def search_user(people, query)
   if query.class == String
@@ -156,6 +178,8 @@ def search_user(people, query)
     end
   end
 end
+
+# Search User
 
 # puts "Choose an option below:\n"
 # puts "(1) Search By Name\n(2) Search By National ID"
