@@ -21,8 +21,6 @@ people = [
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
 
-
-
 # Helper function
 
 def show_people_list(people, query = nil)
@@ -41,64 +39,94 @@ show_people_list(people, 5)
 
 # Add New User
 # show_people_list(people)
-while true
-  is_duplicate = false
+# while true
+#   is_duplicate = false
+#
+#   # Add or Delete User
+#   puts "Choose an option below:\n"
+#   puts "(1) Add User\n(2) Delete User"
+#   option = gets.chomp
+#   break if option == 'exit'
+#   option = option.to_i
+#
+#   if !(option.equal? 1) && !(option.equal? 2)
+#     p 'Invalid option'
+#   end
+#
+#   if option.equal? 1
+#     p "Enter name:"
+#     name = gets.chomp
+#     break if name == 'exit'
+#
+#     p "Enter age:"
+#     age = gets.chomp
+#     break if age == 'exit'
+#     age = age.to_i
+#
+#     p "Enter national id"
+#     national_id = gets.chomp
+#     break if national_id == 'exit'
+#     national_id = national_id.to_i
+#
+#     people.each do |person|
+#       if person[:national_id].equal? national_id
+#         p "Failed to add: National ID already exists."
+#         is_duplicate = true
+#       end
+#     end
+#
+#     if !is_duplicate
+#       people.unshift({ name: name, age: age, national_id: national_id })
+#       p "User added successfully!"
+#     end
+#
+#   elsif option.equal? 2
+#     p "Enter national id"
+#     national_id = gets.chomp
+#     break if national_id == 'exit'
+#     national_id = national_id.to_i
+#
+#     if people.any? { |h| h[:national_id] == national_id }
+#       people.each do |person|
+#         people.delete(person) if person[:national_id].equal? national_id
+#       end
+#
+#       puts "Successfully deleted."
+#     else
+#       puts "User not found."
+#     end
+#   end
+#
+#   show_people_list(people)
+# end
 
-  # Add or Delete User
-  puts "Choose an option below:\n"
-  puts "(1) Add User\n(2) Delete User"
-  option = gets.chomp
-  break if option == 'exit'
-  option = option.to_i
-
-  if !(option.equal? 1) && !(option.equal? 2)
-    p 'Invalid option'
-  end
-
-  if option.equal? 1
-    p "Enter name:"
-    name = gets.chomp
-    break if name == 'exit'
-
-    p "Enter age:"
-    age = gets.chomp
-    break if age == 'exit'
-    age = age.to_i
-
-    p "Enter national id"
-    national_id = gets.chomp
-    break if national_id == 'exit'
-    national_id = national_id.to_i
-
-    people.each do |person|
-      if person[:national_id].equal? national_id
-        p "Failed to add: National ID already exists."
-        is_duplicate = true
-      end
-    end
-
-    if !is_duplicate
-      people.unshift({ name: name, age: age, national_id: national_id })
-      p "User added successfully!"
-    end
-
-  elsif option.equal? 2
-    p "Enter national id"
-    national_id = gets.chomp
-    break if national_id == 'exit'
-    national_id = national_id.to_i
-
-    if people.any? { |h| h[:national_id] == national_id }
-      people.each do |person|
-        people.delete(person) if person[:national_id].equal? national_id
-      end
-
-      puts "Successfully deleted."
+def search_user(people, query)
+  if query.class == String
+    if people.any? { |person| person[:name].downcase == query}
+      p people.select {|person| person[:name].downcase == query }
     else
-      puts "User not found."
+      p "User not found"
+    end
+  elsif query.class == Integer
+    if people.any? { |person| person[:national_id] == query}
+      p people.select {|person| person[:national_id] == query }
+    else
+      p "User not found"
     end
   end
+end
 
-  show_people_list(people)
+puts "Choose an option below:\n"
+puts "(1) Search By Name\n(2) Search By National ID"
+search_option = gets.to_i
+
+if search_option == 1
+  puts "Enter username:"
+  name = gets.chomp
+  search_user(people, name)
+elsif search_option == 2
+  puts "Enter national id:"
+  national_id = gets.to_i
+  search_user(people, national_id)
 end
 
