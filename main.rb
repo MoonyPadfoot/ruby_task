@@ -58,7 +58,7 @@ if option.equal? 1
   end
 
   unless is_duplicate
-    people.push({ name: name, age: age, national_id: national_id })
+    people.unshift({ name: name, age: age, national_id: national_id })
     p "User added successfully!"
   end
 elsif option.equal? 2
