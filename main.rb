@@ -21,35 +21,59 @@ people = [
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
 
+# Helper function
+
 def show_people_list(people)
   people.each do |person|
     p person
   end
 end
 
-show_people_list(people)
-
 # Add New User
-p "Enter name:"
-name = gets.chomp
-p "Enter age:"
-age = gets.to_i
-p "Enter national id"
-national_id = gets.to_i
+show_people_list(people)
 is_duplicate = false
 
-people.each do |val|
-  if val[:national_id].equal? national_id
-    p "Failed to add: National ID already exists."
-    is_duplicate = true
+# Add or Delete User
+puts "Choose an option below:\n"
+puts "(1) Add User\n(2) Delete User"
+option = gets.to_i
+
+if !(option.equal? 1) && !(option.equal? 2)
+  p 'Invalid option'
+end
+
+if option.equal? 1
+  p "Enter name:"
+  name = gets.chomp
+  p "Enter age:"
+  age = gets.to_i
+  p "Enter national id"
+  national_id = gets.to_i
+
+  people.each do |person|
+    if person[:national_id].equal? national_id
+      p "Failed to add: National ID already exists."
+      is_duplicate = true
+    end
+  end
+
+  unless is_duplicate
+    people.push({ name: name, age: age, national_id: national_id })
+    p "User added successfully!"
+  end
+elsif option.equal? 2
+  p "Enter national id"
+  national_id = gets.to_i
+
+  if people.any? { |h| h[:national_id] == national_id }
+    people.each do |person|
+      people.delete(person) if person[:national_id].equal? national_id
+    end
+
+    puts "Successfully deleted."
+  else
+    puts "User not found."
   end
 end
 
-unless is_duplicate
-  people.push({ name: name, age: age, national_id: national_id })
-  p "User added successfully!"
-end
-
 show_people_list(people)
-
-
