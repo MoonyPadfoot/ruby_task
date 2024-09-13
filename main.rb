@@ -30,50 +30,65 @@ def show_people_list(people)
 end
 
 # Add New User
-show_people_list(people)
-is_duplicate = false
+# show_people_list(people)
+while true
+  is_duplicate = false
 
-# Add or Delete User
-puts "Choose an option below:\n"
-puts "(1) Add User\n(2) Delete User"
-option = gets.to_i
+  # Add or Delete User
+  puts "Choose an option below:\n"
+  puts "(1) Add User\n(2) Delete User"
+  option = gets.chomp
+  break if option == 'exit'
+  option = option.to_i
 
-if !(option.equal? 1) && !(option.equal? 2)
-  p 'Invalid option'
-end
-
-if option.equal? 1
-  p "Enter name:"
-  name = gets.chomp
-  p "Enter age:"
-  age = gets.to_i
-  p "Enter national id"
-  national_id = gets.to_i
-
-  people.each do |person|
-    if person[:national_id].equal? national_id
-      p "Failed to add: National ID already exists."
-      is_duplicate = true
-    end
+  if !(option.equal? 1) && !(option.equal? 2)
+    p 'Invalid option'
   end
 
-  unless is_duplicate
-    people.unshift({ name: name, age: age, national_id: national_id })
-    p "User added successfully!"
-  end
-elsif option.equal? 2
-  p "Enter national id"
-  national_id = gets.to_i
+  if option.equal? 1
+    p "Enter name:"
+    name = gets.chomp
+    break if name == 'exit'
 
-  if people.any? { |h| h[:national_id] == national_id }
+    p "Enter age:"
+    age = gets.chomp
+    break if age == 'exit'
+    age = age.to_i
+
+    p "Enter national id"
+    national_id = gets.chomp
+    break if national_id == 'exit'
+    national_id = national_id.to_i
+
     people.each do |person|
-      people.delete(person) if person[:national_id].equal? national_id
+      if person[:national_id].equal? national_id
+        p "Failed to add: National ID already exists."
+        is_duplicate = true
+      end
     end
 
-    puts "Successfully deleted."
-  else
-    puts "User not found."
+    if !is_duplicate
+      people.unshift({ name: name, age: age, national_id: national_id })
+      p "User added successfully!"
+    end
+
+  elsif option.equal? 2
+    p "Enter national id"
+    national_id = gets.chomp
+    break if national_id == 'exit'
+    national_id = national_id.to_i
+
+    if people.any? { |h| h[:national_id] == national_id }
+      people.each do |person|
+        people.delete(person) if person[:national_id].equal? national_id
+      end
+
+      puts "Successfully deleted."
+    else
+      puts "User not found."
+    end
   end
+
+  show_people_list(people)
 end
 
-show_people_list(people)
