@@ -42,9 +42,9 @@ end
 
 puts show_people_list(people, 5)
 
+option = 0
 # Add New User
-
-while true
+while option != 'exit'
   is_duplicate = false
 
   # Add or Delete User
@@ -57,19 +57,13 @@ while true
     puts "Are you sure you want to exit (y/n)?"
     confirm = gets.chomp
 
-    if confirm.downcase == 'y'
-      break
-    end
+    break if confirm.downcase == 'y'
   end
 
   option = option.to_i
 
-  if !(option.equal? 1) && !(option.equal? 2) && !(option.equal? 3) && !(option.equal? 4)
-    p 'Invalid option'
-  end
-
-  if option.equal? 1
-    p "Enter name:"
+  if option == 1
+    puts "Enter name:"
     name = gets.chomp
 
     if name == 'exit'
@@ -81,7 +75,7 @@ while true
       end
     end
 
-    p "Enter age:"
+    puts "Enter age:"
     age = gets.chomp
 
     if age == 'exit'
@@ -94,7 +88,7 @@ while true
     end
     age = age.to_i
 
-    p "Enter national id"
+    puts "Enter national id"
     national_id = gets.chomp
 
     if national_id == 'exit'
@@ -109,18 +103,18 @@ while true
 
     people.each do |person|
       if person[:national_id].equal? national_id
-        p "Failed to add: National ID already exists."
+        puts "Failed to add: National ID already exists."
         is_duplicate = true
       end
     end
 
     if !is_duplicate
       people.unshift({ name: name, age: age, national_id: national_id })
-      p "User added successfully!"
+      puts "User added successfully!"
     end
 
-  elsif option.equal? 2
-    p "Enter national id"
+  elsif option == 2
+    puts "Enter national id"
     national_id = gets.chomp
     if national_id == 'exit'
       puts "Are you sure you want to exit (y/n)?"
@@ -142,8 +136,8 @@ while true
       puts "User not found."
     end
 
-  elsif  option.equal? 3
-    p "Enter national id"
+  elsif option == 3
+    puts "Enter national id"
     national_id = gets.chomp
     if national_id == 'exit'
       puts "Are you sure you want to exit (y/n)?"
@@ -183,7 +177,7 @@ while true
       age = gets.to_i
       target.first[:age] = age
 
-      p target
+      puts target
     else
       puts "No User found."
     end
@@ -201,6 +195,8 @@ while true
       national_id = gets.to_i
       puts search_user(people, national_id)
     end
+  else
+    puts "Invalid option.\n"
   end
 
 end
