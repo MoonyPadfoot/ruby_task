@@ -1,3 +1,5 @@
+require "./query_helper.rb"
+
 people = [
   { name: 'Ren', age: 26, national_id: 1 },
   { name: 'Josh', age: 19, national_id: 2 },
@@ -21,21 +23,10 @@ people = [
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
 # system('clear')
-
-def show_people_list(people, query = nil)
-  query ? people[0..query] : people
-end
-
-def search_user(people, query)
-  person = people.find { |person| (person[query.class == String ? :name : :national_id]).downcase == query.downcase }
-  person || "User not found.\n"
-end
-
-puts show_people_list(people, 5)
+puts QueryHelper.show_people_list(people, 5)
 
 option = nil
 while option != 'exit'
-
   puts "Choose an option below:\n"
   puts "(1) Add User\n(2) Delete User\n(3) Edit User\n(4) Search User"
   option = gets.chomp
@@ -62,7 +53,7 @@ while option != 'exit'
     else
       people.unshift({ name: name, age: age, national_id: national_id })
       puts "User added successfully!"
-      puts show_people_list(people, 5)
+      puts QueryHelper.show_people_list(people, 5)
     end
 
   elsif option.to_i == 2
@@ -73,10 +64,11 @@ while option != 'exit'
     if person
       people.delete(person) if person[:national_id].equal? national_id
       puts "Successfully deleted."
-      puts show_people_list(people, 5)
+      puts QueryHelper.show_people_list(people, 5)
     else
       puts "User not found."
     end
+
   elsif option.to_i == 3
     puts "Enter national id"
     national_id = gets.to_i
@@ -91,10 +83,11 @@ while option != 'exit'
       age = gets.to_i
       person[:age] = age
 
-      puts show_people_list(people, 5)
+      puts QueryHelper.show_people_list(people, 5)
     else
       puts "No User found."
     end
+
   elsif option.to_i == 4
     puts "Choose an option below:\n"
     puts "(1) Search By Name\n(2) Search By National ID"
@@ -103,14 +96,15 @@ while option != 'exit'
     if search_option == 1
       puts "Enter name:"
       name = gets.chomp
-      puts search_user(people, name)
+      puts QueryHelper.search_user(people, name)
 
     elsif search_option == 2
       puts "Enter national id:"
       national_id = gets.to_i
-      puts search_user(people, national_id)
+      puts QueryHelper.search_user(people, national_id)
 
     end
+
   else
     puts "Invalid option.\n"
   end
