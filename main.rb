@@ -79,6 +79,24 @@ def edit_person(people)
   end
 end
 
+def search_person(people)
+  puts "Choose an option below:\n"
+  puts "(1) Search By Name\n(2) Search By National ID"
+  search_option = gets.to_i
+
+  if search_option == 1
+    puts "Enter name:"
+    name = gets.chomp
+    puts search_user(people, name)
+
+  elsif search_option == 2
+    puts "Enter national id:"
+    national_id = gets.to_i
+    puts search_user(people, national_id)
+
+  end
+end
+
 confirm = nil
 
 while confirm != 'y'
@@ -100,21 +118,7 @@ while confirm != 'y'
 
     # Search
   elsif option.to_i == 4
-    puts "Choose an option below:\n"
-    puts "(1) Search By Name\n(2) Search By National ID"
-    search_option = gets.to_i
-
-    if search_option == 1
-      puts "Enter name:"
-      name = gets.chomp
-      puts search_user(people, name)
-
-    elsif search_option == 2
-      puts "Enter national id:"
-      national_id = gets.to_i
-      puts search_user(people, national_id)
-
-    end
+    search_person(people)
 
     # Exit
   elsif option == 'exit'
