@@ -20,17 +20,32 @@ people = [
   { name: 'Mary', age: 25, national_id: 19 },
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
+# system('clear')
 
 # Helper function
 
 def show_people_list(people, query = nil)
   if query != nil
-    query.times do |key|
-      p people[key]
-    end
+    puts people[0..query]
   else
-    people.each do |person|
-      p person
+    puts people
+  end
+end
+
+# Search Helper method
+
+def search_user(people, query)
+  if query.class == String
+    if people.any? { |person| person[:name].downcase == query}
+      p people.select {|person| person[:name].downcase == query }
+    else
+      p "User not found"
+    end
+  elsif query.class == Integer
+    if people.any? { |person| person[:national_id] == query}
+      p people.select {|person| person[:national_id] == query }
+    else
+      p "User not found"
     end
   end
 end
@@ -44,8 +59,9 @@ while true
   is_duplicate = false
 
   # Add or Delete User
+
   puts "Choose an option below:\n"
-  puts "(1) Add User\n(2) Delete User\n(3) Edit User"
+  puts "(1) Add User\n(2) Delete User\n(3) Edit User\n(4) Search User"
   option = gets.chomp
 
   if option == 'exit'
@@ -59,7 +75,7 @@ while true
 
   option = option.to_i
 
-  if !(option.equal? 1) && !(option.equal? 2) && !(option.equal? 3)
+  if !(option.equal? 1) && !(option.equal? 2) && !(option.equal? 3) && !(option.equal? 4)
     p 'Invalid option'
   end
 
@@ -182,42 +198,24 @@ while true
     else
       puts "No User found."
     end
-  end
+  elsif option == 4
+    puts "Choose an option below:\n"
+    puts "(1) Search By Name\n(2) Search By National ID"
+    search_option = gets.to_i
 
-  # show_people_list(people)
-end
-
-# Search Helper method
-
-def search_user(people, query)
-  if query.class == String
-    if people.any? { |person| person[:name].downcase == query}
-      p people.select {|person| person[:name].downcase == query }
-    else
-      p "User not found"
-    end
-  elsif query.class == Integer
-    if people.any? { |person| person[:national_id] == query}
-      p people.select {|person| person[:national_id] == query }
-    else
-      p "User not found"
+    if search_option == 1
+      puts "Enter username:"
+      name = gets.chomp
+      search_user(people, name)
+    elsif search_option == 2
+      puts "Enter national id:"
+      national_id = gets.to_i
+      search_user(people, national_id)
     end
   end
+
 end
 
-# Search User
 
-# puts "Choose an option below:\n"
-# puts "(1) Search By Name\n(2) Search By National ID"
-# search_option = gets.to_i
-#
-# if search_option == 1
-#   puts "Enter username:"
-#   name = gets.chomp
-#   search_user(people, name)
-# elsif search_option == 2
-#   puts "Enter national id:"
-#   national_id = gets.to_i
-#   search_user(people, national_id)
-# end
+
 
