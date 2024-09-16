@@ -97,6 +97,13 @@ def search_person(people)
   end
 end
 
+def exit_program
+  puts "Are you sure you want to exit (y/n)?"
+  confirm = gets.chomp
+
+  confirm.downcase == 'y'
+end
+
 confirm = nil
 
 while confirm != 'y'
@@ -122,10 +129,7 @@ while confirm != 'y'
 
     # Exit
   elsif option == 'exit'
-    puts "Are you sure you want to exit (y/n)?"
-    confirm = gets.chomp
-
-    break if confirm.downcase == 'y'
+    break if exit_program
     next
   else
     puts "Invalid option.\n"

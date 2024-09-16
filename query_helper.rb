@@ -4,7 +4,11 @@ module QueryHelper
   end
 
   def search_user(people, query)
-    person = people.find { |person| (person[query.class == String ? :name : :national_id]).downcase == query.downcase }
+    if query.class == String
+      person = people.find { |person| person[:name].downcase == query.downcase }
+    else
+      person = people.find { |person| person[:national_id] == query }
+    end
     person || "User not found.\n"
   end
 end
