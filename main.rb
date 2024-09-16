@@ -59,6 +59,26 @@ def delete_person(people)
   end
 end
 
+def edit_person(people)
+  puts "Enter national id"
+  national_id = gets.to_i
+
+  person = people.find { |person| person[:national_id] == national_id }
+  if person
+    puts "Enter name:"
+    name = gets.chomp
+    person[:name] = name
+
+    puts "Enter age:"
+    age = gets.to_i
+    person[:age] = age
+
+    puts show_people_list(people, 5)
+  else
+    puts "No User found."
+  end
+end
+
 confirm = nil
 
 while confirm != 'y'
@@ -76,23 +96,7 @@ while confirm != 'y'
 
     # Edit
   elsif option.to_i == 3
-    puts "Enter national id"
-    national_id = gets.to_i
-
-    person = people.find { |person| person[:national_id] == national_id }
-    if person
-      puts "Enter name:"
-      name = gets.chomp
-      person[:name] = name
-
-      puts "Enter age:"
-      age = gets.to_i
-      person[:age] = age
-
-      puts show_people_list(people, 5)
-    else
-      puts "No User found."
-    end
+    edit_person(people)
 
     # Search
   elsif option.to_i == 4
