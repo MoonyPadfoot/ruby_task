@@ -29,12 +29,15 @@ puts show_people_list(people, 5)
 def add_person(people)
   puts "Enter name:"
   name = gets.chomp
+  clear_console
 
   puts "Enter age:"
   age = gets.to_i
+  clear_console
 
   puts "Enter national id"
   national_id = gets.to_i
+  clear_console
 
   if people.find { |person| person[:national_id] == national_id }
     puts "Failed to add: National ID already exists."
@@ -48,6 +51,7 @@ end
 def delete_person(people)
   puts "Enter national id"
   national_id = gets.to_i
+  clear_console
 
   person = people.find { |person| person[:national_id] == national_id }
   if person
@@ -62,6 +66,7 @@ end
 def edit_person(people)
   puts "Enter national id"
   national_id = gets.to_i
+  clear_console
 
   person = people.find { |person| person[:national_id] == national_id }
   if person
@@ -83,15 +88,18 @@ def search_person(people)
   puts "Choose an option below:\n"
   puts "(1) Search By Name\n(2) Search By National ID"
   search_option = gets.to_i
+  clear_console
 
   if search_option == 1
     puts "Enter name:"
     name = gets.chomp
+    clear_console
     puts search_user(people, name)
 
   elsif search_option == 2
     puts "Enter national id:"
     national_id = gets.to_i
+    clear_console
     puts search_user(people, national_id)
 
   end
@@ -100,8 +108,13 @@ end
 def exit_program
   puts "Are you sure you want to exit (y/n)?"
   confirm = gets.chomp
+  clear_console
 
   confirm.downcase == 'y'
+end
+
+def clear_console
+  system('clear')
 end
 
 confirm = nil
@@ -113,18 +126,22 @@ while confirm != 'y'
 
   # Add
   if option.to_i == 1
+    clear_console
     add_person(people)
 
     # Delete
   elsif option.to_i == 2
+    clear_console
     delete_person(people)
 
     # Edit
   elsif option.to_i == 3
+    clear_console
     edit_person(people)
 
     # Search
   elsif option.to_i == 4
+    clear_console
     search_person(people)
 
     # Exit
