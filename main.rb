@@ -73,13 +73,11 @@ while option != 'exit'
 
   elsif option.to_i == 2
     puts "Enter national id"
-    national_id = national_id.to_i
+    national_id = gets.to_i
 
-    if people.any? { |person| person[:national_id] == national_id }
-      people.each do |person|
-        people.delete(person) if person[:national_id].equal? national_id
-      end
-
+    person = people.find { |person| person[:national_id] == national_id }
+    if person
+      people.delete(person) if person[:national_id].equal? national_id
       puts "Successfully deleted."
     else
       puts "User not found."
