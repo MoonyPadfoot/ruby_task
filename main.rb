@@ -26,6 +26,25 @@ people = [
 # system('clear')
 puts show_people_list(people, 5)
 
+def add_person(people)
+  puts "Enter name:"
+  name = gets.chomp
+
+  puts "Enter age:"
+  age = gets.to_i
+
+  puts "Enter national id"
+  national_id = gets.to_i
+
+  if people.find { |person| person[:national_id] == national_id }
+    puts "Failed to add: National ID already exists."
+  else
+    people.unshift({ name: name, age: age, national_id: national_id })
+    puts "User added successfully!"
+    puts show_people_list(people, 5)
+  end
+end
+
 confirm = nil
 
 while confirm != 'y'
@@ -35,24 +54,9 @@ while confirm != 'y'
 
   # Add
   if option.to_i == 1
-    puts "Enter name:"
-    name = gets.chomp
+    add_person(people)
 
-    puts "Enter age:"
-    age = gets.to_i
-
-    puts "Enter national id"
-    national_id = gets.to_i
-
-    if people.find { |person| person[:national_id] == national_id }
-      puts "Failed to add: National ID already exists."
-    else
-      people.unshift({ name: name, age: age, national_id: national_id })
-      puts "User added successfully!"
-      p show_people_list(people, 5)
-    end
-
-  # Delete
+    # Delete
   elsif option.to_i == 2
     puts "Enter national id"
     national_id = gets.to_i
@@ -66,7 +70,7 @@ while confirm != 'y'
       puts "User not found."
     end
 
-  # Edit
+    # Edit
   elsif option.to_i == 3
     puts "Enter national id"
     national_id = gets.to_i
@@ -86,7 +90,7 @@ while confirm != 'y'
       puts "No User found."
     end
 
-  # Search
+    # Search
   elsif option.to_i == 4
     puts "Choose an option below:\n"
     puts "(1) Search By Name\n(2) Search By National ID"
@@ -104,7 +108,7 @@ while confirm != 'y'
 
     end
 
-  # Exit
+    # Exit
   elsif option == 'exit'
     puts "Are you sure you want to exit (y/n)?"
     confirm = gets.chomp
