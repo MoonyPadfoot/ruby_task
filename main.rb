@@ -43,7 +43,6 @@ while option != 'exit'
   is_duplicate = false
 
   # Add or Delete User
-
   puts "Choose an option below:\n"
   puts "(1) Add User\n(2) Delete User\n(3) Edit User\n(4) Search User"
   option = gets.chomp
@@ -55,8 +54,7 @@ while option != 'exit'
     break if confirm.downcase == 'y'
   end
 
-  option = option.to_i
-  if option == 1
+  if option.to_i == 1
     puts "Enter name:"
     name = gets.chomp
 
@@ -78,7 +76,7 @@ while option != 'exit'
       puts "User added successfully!"
     end
 
-  elsif option == 2
+  elsif option.to_i == 2
     puts "Enter national id"
     national_id = national_id.to_i
 
@@ -92,7 +90,7 @@ while option != 'exit'
       puts "User not found."
     end
 
-  elsif option == 3
+  elsif option.to_i == 3
     puts "Enter national id"
     national_id = gets.chomp
 
@@ -112,7 +110,7 @@ while option != 'exit'
     else
       puts "No User found."
     end
-  elsif option == 4
+  elsif option.to_i == 4
     puts "Choose an option below:\n"
     puts "(1) Search By Name\n(2) Search By National ID"
     search_option = gets.to_i
@@ -129,7 +127,6 @@ while option != 'exit'
   else
     puts "Invalid option.\n"
   end
-
 end
 
 
