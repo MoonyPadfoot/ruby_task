@@ -56,44 +56,14 @@ while option != 'exit'
   end
 
   option = option.to_i
-
   if option == 1
     puts "Enter name:"
     name = gets.chomp
 
-    if name == 'exit'
-      puts "Are you sure you want to exit (y/n)?"
-      confirm = gets.chomp
-
-      if confirm.downcase == 'y'
-        break
-      end
-    end
-
     puts "Enter age:"
-    age = gets.chomp
-
-    if age == 'exit'
-      puts "Are you sure you want to exit (y/n)?"
-      confirm = gets.chomp
-
-      if confirm.downcase == 'y'
-        break
-      end
-    end
     age = age.to_i
 
     puts "Enter national id"
-    national_id = gets.chomp
-
-    if national_id == 'exit'
-      puts "Are you sure you want to exit (y/n)?"
-      confirm = gets.chomp
-
-      if confirm.downcase == 'y'
-        break
-      end
-    end
     national_id = national_id.to_i
 
     people.each do |person|
@@ -110,15 +80,6 @@ while option != 'exit'
 
   elsif option == 2
     puts "Enter national id"
-    national_id = gets.chomp
-    if national_id == 'exit'
-      puts "Are you sure you want to exit (y/n)?"
-      confirm = gets.chomp
-
-      if confirm.downcase == 'y'
-        break
-      end
-    end
     national_id = national_id.to_i
 
     if people.any? { |person| person[:national_id] == national_id }
@@ -134,41 +95,16 @@ while option != 'exit'
   elsif option == 3
     puts "Enter national id"
     national_id = gets.chomp
-    if national_id == 'exit'
-      puts "Are you sure you want to exit (y/n)?"
-      confirm = gets.chomp
-
-      if confirm.downcase == 'y'
-        break
-      end
-    end
 
     national_id = national_id.to_i
     if people.any? { |person| person[:national_id] == national_id }
       target = people.select { |person| person[:national_id] == national_id }
+
       puts "Enter name:"
       name = gets.chomp
-      if name == 'exit'
-        puts "Are you sure you want to exit (y/n)?"
-        confirm = gets.chomp
-
-        if confirm.downcase == 'y'
-          break
-        end
-      end
-
       target.first[:name] = name
 
       puts "Enter age:"
-      age = gets.chomp
-      if age == 'exit'
-        puts "Are you sure you want to exit (y/n)?"
-        confirm = gets.chomp
-
-        if confirm.downcase == 'y'
-          break
-        end
-      end
       age = gets.to_i
       target.first[:age] = age
 
