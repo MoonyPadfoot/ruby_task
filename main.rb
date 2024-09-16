@@ -25,18 +25,12 @@ people = [
 # system('clear')
 puts QueryHelper.show_people_list(people, 5)
 
-option = nil
-while option != 'exit'
+confirm = nil
+
+while confirm != 'y'
   puts "Choose an option below:\n"
   puts "(1) Add User\n(2) Delete User\n(3) Edit User\n(4) Search User"
   option = gets.chomp
-
-  if option == 'exit'
-    puts "Are you sure you want to exit (y/n)?"
-    confirm = gets.chomp
-
-    break if confirm.downcase == 'y'
-  end
 
   if option.to_i == 1
     puts "Enter name:"
@@ -105,8 +99,15 @@ while option != 'exit'
 
     end
 
+  elsif option == 'exit'
+    puts "Are you sure you want to exit (y/n)?"
+    confirm = gets.chomp
+
+    break if confirm.downcase == 'y'
+    next
   else
     puts "Invalid option.\n"
+
   end
 end
 
