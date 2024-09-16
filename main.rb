@@ -82,24 +82,21 @@ while option != 'exit'
     else
       puts "User not found."
     end
-
   elsif option.to_i == 3
     puts "Enter national id"
-    national_id = gets.chomp
+    national_id = gets.to_i
 
-    national_id = national_id.to_i
-    if people.any? { |person| person[:national_id] == national_id }
-      target = people.select { |person| person[:national_id] == national_id }
-
+    person = people.find { |person| person[:national_id] == national_id }
+    if person
       puts "Enter name:"
       name = gets.chomp
-      target.first[:name] = name
+      person[:name] = name
 
       puts "Enter age:"
       age = gets.to_i
-      target.first[:age] = age
+      person[:age] = age
 
-      puts target
+      puts show_people_list(people, 5)
     else
       puts "No User found."
     end
