@@ -69,6 +69,7 @@ while option != 'exit'
     else
       people.unshift({ name: name, age: age, national_id: national_id })
       puts "User added successfully!"
+      puts show_people_list(people, 5)
     end
 
   elsif option.to_i == 2
@@ -79,6 +80,7 @@ while option != 'exit'
     if person
       people.delete(person) if person[:national_id].equal? national_id
       puts "Successfully deleted."
+      puts show_people_list(people, 5)
     else
       puts "User not found."
     end
