@@ -22,13 +22,9 @@ people = [
 ]
 # system('clear')
 
-# Helper function
-
 def show_people_list(people, query = nil)
   query ? people[0..query] : people
 end
-
-# Search Helper method
 
 def search_user(people, query)
   person = people.find { |person| (person[query.class == String ? :name : :national_id]).downcase == query.downcase }
@@ -37,12 +33,9 @@ end
 
 puts show_people_list(people, 5)
 
-option = 0
-# Add New User
+option = nil
 while option != 'exit'
-  is_duplicate = false
 
-  # Add or Delete User
   puts "Choose an option below:\n"
   puts "(1) Add User\n(2) Delete User\n(3) Edit User\n(4) Search User"
   option = gets.chomp
@@ -111,10 +104,12 @@ while option != 'exit'
       puts "Enter name:"
       name = gets.chomp
       puts search_user(people, name)
+
     elsif search_option == 2
       puts "Enter national id:"
       national_id = gets.to_i
       puts search_user(people, national_id)
+
     end
   else
     puts "Invalid option.\n"
