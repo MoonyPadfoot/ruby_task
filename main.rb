@@ -59,19 +59,14 @@ while option != 'exit'
     name = gets.chomp
 
     puts "Enter age:"
-    age = age.to_i
+    age = gets.to_i
 
     puts "Enter national id"
-    national_id = national_id.to_i
+    national_id = gets.to_i
 
-    people.each do |person|
-      if person[:national_id].equal? national_id
-        puts "Failed to add: National ID already exists."
-        is_duplicate = true
-      end
-    end
-
-    if !is_duplicate
+    if people.find { |person| person[:national_id] == national_id }
+      puts "Failed to add: National ID already exists."
+    else
       people.unshift({ name: name, age: age, national_id: national_id })
       puts "User added successfully!"
     end
