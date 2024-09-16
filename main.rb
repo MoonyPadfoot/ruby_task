@@ -45,6 +45,20 @@ def add_person(people)
   end
 end
 
+def delete_person(people)
+  puts "Enter national id"
+  national_id = gets.to_i
+
+  person = people.find { |person| person[:national_id] == national_id }
+  if person
+    people.delete(person) if person[:national_id].equal? national_id
+    puts "Successfully deleted."
+    puts show_people_list(people, 5)
+  else
+    puts "User not found."
+  end
+end
+
 confirm = nil
 
 while confirm != 'y'
@@ -58,17 +72,7 @@ while confirm != 'y'
 
     # Delete
   elsif option.to_i == 2
-    puts "Enter national id"
-    national_id = gets.to_i
-
-    person = people.find { |person| person[:national_id] == national_id }
-    if person
-      people.delete(person) if person[:national_id].equal? national_id
-      puts "Successfully deleted."
-      puts show_people_list(people, 5)
-    else
-      puts "User not found."
-    end
+    delete_person(people)
 
     # Edit
   elsif option.to_i == 3
