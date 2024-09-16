@@ -25,11 +25,8 @@ people = [
 # Helper function
 
 def show_people_list(people, query = nil)
-  if query != nil
-    puts people[0..query]
-  else
-    puts people
-  end
+  return people[0..query] if query
+  people
 end
 
 # Search Helper method
@@ -40,11 +37,10 @@ def search_user(people, query)
   unless person
     return "User not found.\n"
   end
-
   person
 end
 
-show_people_list(people)
+puts show_people_list(people, 5)
 
 # Add New User
 
