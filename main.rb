@@ -25,19 +25,14 @@ people = [
 # Helper function
 
 def show_people_list(people, query = nil)
-  return people[0..query] if query
-  people
+  query ? people[0..query] : people
 end
 
 # Search Helper method
 
 def search_user(people, query)
-  person = people.find {|person| (person[query.class == String ? :username : :national_id]) == query }
-
-  unless person
-    return "User not found.\n"
-  end
-  person
+  person = people.find { |person| (person[query.class == String ? :name : :national_id]).downcase == query.downcase }
+  person || "User not found.\n"
 end
 
 puts show_people_list(people, 5)
@@ -150,7 +145,7 @@ while option != 'exit'
 
     national_id = national_id.to_i
     if people.any? { |person| person[:national_id] == national_id }
-      target = people.select {|person| person[:national_id] == national_id }
+      target = people.select { |person| person[:national_id] == national_id }
       puts "Enter name:"
       name = gets.chomp
       if name == 'exit'
@@ -187,8 +182,8 @@ while option != 'exit'
     search_option = gets.to_i
 
     if search_option == 1
-      puts "Enter username:"
-      name = gets.chomp.downcase
+      puts "Enter name:"
+      name = gets.chomp
       puts search_user(people, name)
     elsif search_option == 2
       puts "Enter national id:"
