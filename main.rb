@@ -50,11 +50,10 @@ def search_user(people, query)
   end
 end
 
-show_people_list(people, 5)
+show_people_list(people)
 
 # Add New User
 
-show_people_list(people)
 while true
   is_duplicate = false
 
