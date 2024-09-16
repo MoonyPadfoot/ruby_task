@@ -35,19 +35,13 @@ end
 # Search Helper method
 
 def search_user(people, query)
-  if query.class == String
-    if people.any? { |person| person[:name].downcase == query}
-      p people.select {|person| person[:name].downcase == query }
-    else
-      p "User not found"
-    end
-  elsif query.class == Integer
-    if people.any? { |person| person[:national_id] == query}
-      p people.select {|person| person[:national_id] == query }
-    else
-      p "User not found"
-    end
+  person = people.find {|person| (person[query.class == String ? :username : :national_id]) == query }
+
+  unless person
+    return "User not found.\n"
   end
+
+  person
 end
 
 show_people_list(people)
@@ -204,12 +198,12 @@ while true
 
     if search_option == 1
       puts "Enter username:"
-      name = gets.chomp
-      search_user(people, name)
+      name = gets.chomp.downcase
+      puts search_user(people, name)
     elsif search_option == 2
       puts "Enter national id:"
       national_id = gets.to_i
-      search_user(people, national_id)
+      puts search_user(people, national_id)
     end
   end
 
