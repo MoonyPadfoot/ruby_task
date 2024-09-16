@@ -1,8 +1,9 @@
 require "./query_helper.rb"
+require "./person.rb"
+include QueryHelper
 
 people = [
   { name: 'Ren', age: 26, national_id: 1 },
-  { name: 'Josh', age: 19, national_id: 2 },
   { name: 'Rose', age: 27, national_id: 3 },
   { name: 'Chase', age: 27, national_id: 4 },
   { name: 'Precious', age: 23, national_id: 5 },
@@ -23,7 +24,7 @@ people = [
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
 # system('clear')
-puts QueryHelper.show_people_list(people, 5)
+puts show_people_list(people, 5)
 
 confirm = nil
 
@@ -32,6 +33,7 @@ while confirm != 'y'
   puts "(1) Add User\n(2) Delete User\n(3) Edit User\n(4) Search User"
   option = gets.chomp
 
+  # Add
   if option.to_i == 1
     puts "Enter name:"
     name = gets.chomp
@@ -47,9 +49,10 @@ while confirm != 'y'
     else
       people.unshift({ name: name, age: age, national_id: national_id })
       puts "User added successfully!"
-      puts QueryHelper.show_people_list(people, 5)
+      p show_people_list(people, 5)
     end
 
+  # Delete
   elsif option.to_i == 2
     puts "Enter national id"
     national_id = gets.to_i
@@ -58,11 +61,12 @@ while confirm != 'y'
     if person
       people.delete(person) if person[:national_id].equal? national_id
       puts "Successfully deleted."
-      puts QueryHelper.show_people_list(people, 5)
+      puts show_people_list(people, 5)
     else
       puts "User not found."
     end
 
+  # Edit
   elsif option.to_i == 3
     puts "Enter national id"
     national_id = gets.to_i
@@ -77,11 +81,12 @@ while confirm != 'y'
       age = gets.to_i
       person[:age] = age
 
-      puts QueryHelper.show_people_list(people, 5)
+      puts show_people_list(people, 5)
     else
       puts "No User found."
     end
 
+  # Search
   elsif option.to_i == 4
     puts "Choose an option below:\n"
     puts "(1) Search By Name\n(2) Search By National ID"
@@ -90,15 +95,16 @@ while confirm != 'y'
     if search_option == 1
       puts "Enter name:"
       name = gets.chomp
-      puts QueryHelper.search_user(people, name)
+      puts search_user(people, name)
 
     elsif search_option == 2
       puts "Enter national id:"
       national_id = gets.to_i
-      puts QueryHelper.search_user(people, national_id)
+      puts search_user(people, national_id)
 
     end
 
+  # Exit
   elsif option == 'exit'
     puts "Are you sure you want to exit (y/n)?"
     confirm = gets.chomp
