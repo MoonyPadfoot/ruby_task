@@ -148,6 +148,7 @@ while confirm != 'y'
   elsif option == 'exit'
     break if exit_program
     next
+
   else
     puts "Invalid option.\n"
 
