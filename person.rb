@@ -47,6 +47,10 @@ class Person
     puts "National ID: #{national_id}"
   end
 
+  def find_by_national_id(national_id)
+    @@records.find { |person| person.national_id == national_id}
+  end
+
   def save
     @@records.prepend(self)
   end
