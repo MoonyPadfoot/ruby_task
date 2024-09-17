@@ -30,7 +30,9 @@ class Person
   ]
 
   def self.all
-    @@records
+    @@records.each do |record|
+      record.display
+    end
   end
 
   def self.first
@@ -41,10 +43,10 @@ class Person
     @@records.last
   end
 
-  def self.display
-    puts "Name: #{name}"
-    puts "Age: #{age}"
-    puts "National ID: #{national_id}"
+  def display
+    puts "Name: #{self.name}"
+    puts "Age: #{self.age}"
+    puts "National ID: #{self.national_id}"
   end
 
   def find_by_national_id(national_id)
@@ -63,7 +65,7 @@ class Person
     query ? @@records[0..query] : @@records
   end
 
-  def self.destroy
+  def destroy
     @@records.delete(self)
   end
 

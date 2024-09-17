@@ -25,11 +25,9 @@ people = [
 ]
 # system('clear')
 person = Person.new('test', 11, 23)
+person.display
 person.save
-
-puts Person.show(5)
-Person.destroy
-puts Person.show(5)
+Person.all
 
 def add_person(people)
   puts "Enter name:"
