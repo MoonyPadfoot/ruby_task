@@ -33,6 +33,14 @@ class Person
     @@records
   end
 
+  def self.first
+    @@records.first
+  end
+
+  def self.last
+    @@records.last
+  end
+
   def save
     @@records.prepend(self)
   end
