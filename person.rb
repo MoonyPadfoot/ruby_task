@@ -29,6 +29,10 @@ class Person
     Person.new('Lincoln', 200, 20 ),
   ]
 
+  def self.all
+    @@records
+  end
+
   def save
     @@records.prepend(self)
   end
