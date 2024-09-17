@@ -25,8 +25,11 @@ people = [
 ]
 # system('clear')
 person = Person.new('test', 11, 23)
-person.display
 person.save
+Person.all
+
+person.name = 'test2'
+person.update
 Person.all
 
 def add_person(people)

@@ -47,6 +47,7 @@ class Person
     puts "Name: #{self.name}"
     puts "Age: #{self.age}"
     puts "National ID: #{self.national_id}"
+    puts "==============="
   end
 
   def find_by_national_id(national_id)
@@ -59,10 +60,6 @@ class Person
 
   def update
     @@records.each { |person| person == self }
-  end
-
-  def self.show(query)
-    query ? @@records[0..query] : @@records
   end
 
   def destroy
@@ -84,5 +81,9 @@ class Person
       person = @@records.find { |person| person.national_id == query }
     end
     person || "User not found.\n"
+  end
+
+  def self.show(query)
+    query ? @@records[0..query] : @@records
   end
 end
