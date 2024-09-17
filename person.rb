@@ -48,11 +48,15 @@ class Person
   end
 
   def find_by_national_id(national_id)
-    @@records.find { |person| person.national_id == national_id}
+    @@records.find { |person| person.national_id == national_id }
   end
 
   def save
     @@records.prepend(self)
+  end
+
+  def update
+    @@records.each { |person| person == self }
   end
 
   def self.show(query)
