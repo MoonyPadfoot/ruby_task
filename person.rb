@@ -22,11 +22,11 @@ class Person
     Person.new('Jati', 24, 13),
     Person.new('Carl', 33, 14),
     Person.new('John', 54, 15),
-    Person.new('James', 60, 16 ),
+    Person.new('James', 60, 16),
     Person.new('Jack', 89, 17),
     Person.new('Rylle', 26, 18),
     Person.new('Mary', 25, 19),
-    Person.new('Lincoln', 200, 20 ),
+    Person.new('Lincoln', 200, 20),
   ]
 
   def self.all
@@ -39,6 +39,12 @@ class Person
 
   def self.last
     @@records.last
+  end
+
+  def self.display
+    puts "Name: #{name}"
+    puts "Age: #{age}"
+    puts "National ID: #{national_id}"
   end
 
   def save
