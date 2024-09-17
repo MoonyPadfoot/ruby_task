@@ -24,7 +24,11 @@ people = [
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
 # system('clear')
-puts show_people_list(people, 5)
+person = Person.new('test', 11, 23)
+person.save
+
+puts Person.show(5)
+puts Person.all
 
 def add_person(people)
   puts "Enter name:"

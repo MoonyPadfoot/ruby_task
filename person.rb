@@ -29,6 +29,10 @@ class Person
     Person.new('Lincoln', 200, 20 ),
   ]
 
+  def save
+    @@records.prepend(self)
+  end
+
   def self.show(query)
     query ? @@records[0..query] : @@records
   end
