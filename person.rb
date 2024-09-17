@@ -59,6 +59,10 @@ class Person
     query ? @@records[0..query] : @@records
   end
 
+  def self.destroy
+    @@records.delete(self)
+  end
+
   def self.destroy_all
     @@records.clear
   end

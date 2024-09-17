@@ -28,7 +28,8 @@ person = Person.new('test', 11, 23)
 person.save
 
 puts Person.show(5)
-puts Person.all
+Person.destroy
+puts Person.show(5)
 
 def add_person(people)
   puts "Enter name:"
