@@ -7,27 +7,7 @@ class Person
     @national_id = national_id
   end
 
-  @@records = [
-    Person.new('Ren', 26, 1),
-    Person.new('Rose', 27, 3),
-    Person.new('Chase', 27, 4),
-    Person.new('Precious', 23, 5),
-    Person.new('Lyra', 26, 6),
-    Person.new('Lloyd', 23, 7),
-    Person.new('Jerome', 25, 8),
-    Person.new('Jaarl', 22, 9),
-    Person.new('Bernard', 29, 10),
-    Person.new('Rex', 24, 11),
-    Person.new('Mark', 29, 12),
-    Person.new('Jati', 24, 13),
-    Person.new('Carl', 33, 14),
-    Person.new('John', 54, 15),
-    Person.new('James', 60, 16),
-    Person.new('Jack', 89, 17),
-    Person.new('Rylle', 26, 18),
-    Person.new('Mary', 25, 19),
-    Person.new('Lincoln', 200, 20),
-  ]
+  @@records = []
 
   def self.all
     @@records.each do |record|

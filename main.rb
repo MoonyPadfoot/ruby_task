@@ -24,8 +24,11 @@ people = [
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
 
-# person = Person.new('test', 11, 23)
-# puts Person.find_by_national_id(1)
+people.each do |person|
+  Person.new(person[:name], person[:age], person[:national_id]).save
+end
+
+Person.all
 
 def add_person
   person = Person.new
