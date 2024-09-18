@@ -27,7 +27,7 @@ people = [
 # person = Person.new('test', 11, 23)
 # puts Person.find_by_national_id(1)
 
-def add_person(people)
+def add_person
   person = Person.new
   puts "Enter name:"
   person.name = gets.chomp
@@ -50,16 +50,16 @@ def add_person(people)
   end
 end
 
-def delete_person(people)
+def delete_person
   puts "Enter national id"
   national_id = gets.to_i
   clear_console
 
-  person = people.find { |person| person[:national_id] == national_id }
+  person = Person.find_by_national_id(national_id)
   if person
-    people.delete(person) if person[:national_id].equal? national_id
+    person.destroy
     puts "Successfully deleted."
-    puts show_people_list(people, 5)
+    puts Person.show(5).display
   else
     puts "User not found."
   end
@@ -129,12 +129,12 @@ while confirm != 'y'
   # Add
   if option.to_i == 1
     clear_console
-    add_person(people)
+    add_person
 
     # Delete
   elsif option.to_i == 2
     clear_console
-    delete_person(people)
+    delete_person
 
     # Edit
   elsif option.to_i == 3
