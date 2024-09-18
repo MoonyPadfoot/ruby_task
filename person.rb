@@ -50,7 +50,7 @@ class Person
     puts "==============="
   end
 
-  def find_by_national_id(national_id)
+  def self.find_by_national_id(national_id)
     @@records.find { |person| person.national_id == national_id }
   end
 
@@ -87,3 +87,5 @@ class Person
     query ? @@records[0..query] : @@records
   end
 end
+
+
