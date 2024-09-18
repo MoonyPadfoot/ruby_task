@@ -76,15 +76,20 @@ class Person
 
   def self.search(query)
     if query.instance_of? String
-      person = @@records.find { |person| person.name.downcase == query.downcase }
+      return @@records.find { |person| person.name.downcase == query.downcase }
     else
-      person = @@records.find { |person| person.national_id == query }
+      return @@records.find { |person| person.national_id == query }
     end
-    person || "User not found.\n"
   end
 
   def self.show(query)
-    query ? @@records[0..query] : @@records
+    if query
+      @@records[0..query].each do |record|
+        record.display
+      end
+    else
+      self.all
+    end
   end
 end
 

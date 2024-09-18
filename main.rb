@@ -23,34 +23,30 @@ people = [
   { name: 'Mary', age: 25, national_id: 19 },
   { name: 'Lincoln', age: 200, national_id: 20 },
 ]
-# system('clear')
-person = Person.new('test', 11, 23)
-person.save
-Person.all
 
-person.name = 'test2'
-person.update
-Person.all
+# person = Person.new('test', 11, 23)
+# puts Person.find_by_national_id(1)
 
 def add_person(people)
+  person = Person.new
   puts "Enter name:"
-  name = gets.chomp
+  person.name = gets.chomp
   clear_console
 
   puts "Enter age:"
-  age = gets.to_i
+  person.age = gets.to_i
   clear_console
 
   puts "Enter national id"
-  national_id = gets.to_i
+  person.national_id = gets.to_i
   clear_console
 
-  if people.find { |person| person[:national_id] == national_id }
+  if Person.find_by_national_id(person.national_id)
     puts "Failed to add: National ID already exists."
   else
-    people.unshift({ name: name, age: age, national_id: national_id })
+    person.save
     puts "User added successfully!"
-    puts show_people_list(people, 5)
+    puts Person.show(5).display
   end
 end
 
