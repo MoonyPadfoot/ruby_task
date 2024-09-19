@@ -49,7 +49,7 @@ def add_person
   else
     person.save
     puts "User added successfully!"
-    puts Person.show(5).display
+    Person.show(5)
   end
 end
 
@@ -62,7 +62,7 @@ def delete_person
   if person
     person.destroy
     puts "Successfully deleted."
-    puts Person.show(5).display
+    Person.show(5)
   else
     puts "User not found."
   end
@@ -85,7 +85,7 @@ def edit_person
 
     person.update
 
-    puts Person.show(5)
+    Person.show(5)
   else
     puts "No User found."
   end
@@ -101,13 +101,13 @@ def search_person
     puts "Enter name:"
     name = gets.chomp
     clear_console
-    puts Person.search(name).display
+    Person.search(name)
 
   elsif search_option == 2
     puts "Enter national id:"
     national_id = gets.to_i
     clear_console
-    puts Person.search(national_id).display
+    Person.search(national_id)
 
   end
 end

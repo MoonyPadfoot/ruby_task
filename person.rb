@@ -39,7 +39,12 @@ class Person
   end
 
   def update
-    @@records.each { |person| person == self }
+    @@records.find do |person|
+      if person == self
+        person.name = self.name
+        person.age = self.age
+      end
+    end
   end
 
   def destroy
@@ -72,5 +77,3 @@ class Person
     end
   end
 end
-
-
